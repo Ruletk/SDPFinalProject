@@ -1,15 +1,27 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import logger.Logger;
+import logger.LoggerGenerator;
+import logger.formatter.SimpleFormatter;
+import logger.strategy.StdOutStrategy;
+import logger.strategy.FileStrategy;
+import logger.strategy.ThirdPartyLogger;
+import logger.strategy.ThirdPartyLoggerAdapter;
+
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.print("Hello and welcome!");
+        SimpleFormatter simpleFormatter = new SimpleFormatter();
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+        StdOutStrategy stdOutStrategy = new StdOutStrategy();
+        FileStrategy fileStrategy = new FileStrategy("log.txt");
+
+        ThirdPartyLogger thirdPartyLogger = new ThirdPartyLogger();
+        ThirdPartyLoggerAdapter adapter = new ThirdPartyLoggerAdapter(thirdPartyLogger);
+
+        Logger logger = LoggerGenerator.getInstance(simpleFormatter, stdOutStrategy, fileStrategy, adapter).getLogger(Main.class);
+
+        logger.info("This is an info message.");
+        logger.debug("This is a debug message.");
+        logger.error("This is an error message.");
+        logger.warn("This is a warning message.");
+        logger.critical("This is a critical message.");
     }
 }
