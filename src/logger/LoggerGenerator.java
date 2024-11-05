@@ -20,6 +20,11 @@ public class LoggerGenerator {
         LoggerGenerator.instance = this;
     }
 
+    public static void initialize(Formatter formatter, Strategy... strategies) {
+        if (instance != null) throw new IllegalStateException("LoggerGenerator has already been initialized");
+        new LoggerGenerator(formatter, strategies);
+    }
+
     public static LoggerGenerator getInstance() {
         if (instance == null) throw new IllegalStateException("LoggerGenerator has not been initialized yet.");
         return instance;
