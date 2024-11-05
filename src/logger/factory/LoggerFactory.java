@@ -1,11 +1,10 @@
 package logger.factory;
 
 import logger.Logger;
-import logger.formatter.Formatter;
-import logger.strategy.Strategy;
+import logger.LoggerConfiguration;
 
 public class LoggerFactory {
-    public Logger createLogger(String loggerName, Formatter formatter, Strategy... strategies) {
-        return new Logger(loggerName, formatter, strategies);
+    public Logger createLogger(String loggerName, LoggerConfiguration configuration) {
+        return new Logger(loggerName, configuration);
     }
 }

@@ -1,17 +1,14 @@
 package logger;
 
-import logger.formatter.Formatter;
 import logger.strategy.Strategy;
 
 public class Logger {
     private final String loggerName;
-    private final Formatter formatter;
-    private final Strategy[] strategies;
+    private final LoggerConfiguration configuration;
 
-    public Logger(String loggerName, Formatter formatter, Strategy... strategies) {
+    public Logger(String loggerName, LoggerConfiguration configuration) {
         this.loggerName = loggerName;
-        this.formatter = formatter;
-        this.strategies = strategies;
+        this.configuration = configuration;
     }
 
     public void debug(String message) {
@@ -35,8 +32,8 @@ public class Logger {
     }
 
     private void log(String message, String level) {
-        LogMessage logMessage = new LogMessage(message, level, System.currentTimeMillis(), formatter, loggerName);
-        for (Strategy strategy : strategies) {
+        LogMessage logMessage = new LogMessage(message, level, System.currentTimeMillis(), configuration.getFormatter(), loggerName);
+        for (Strategy strategy : configuration.getStrategies()) {
             strategy.log(logMessage);
         }
     }
