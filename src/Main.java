@@ -1,8 +1,8 @@
 import logger.Logger;
 import logger.LoggerGenerator;
 import logger.formatter.SimpleFormatter;
-import logger.strategy.StdOutStrategy;
 import logger.strategy.FileStrategy;
+import logger.strategy.StdOutStrategy;
 import logger.strategy.ThirdPartyLogger;
 import logger.strategy.ThirdPartyLoggerAdapter;
 
@@ -16,7 +16,8 @@ public class Main {
         ThirdPartyLogger thirdPartyLogger = new ThirdPartyLogger();
         ThirdPartyLoggerAdapter adapter = new ThirdPartyLoggerAdapter(thirdPartyLogger);
 
-        Logger logger = LoggerGenerator.getInstance(simpleFormatter, stdOutStrategy, fileStrategy, adapter).getLogger(Main.class);
+        LoggerGenerator loggerGenerator = new LoggerGenerator(simpleFormatter, stdOutStrategy, fileStrategy, adapter);
+        Logger logger = LoggerGenerator.getInstance().getLogger(Main.class);
 
         logger.info("This is an info message.");
         logger.debug("This is a debug message.");
