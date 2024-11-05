@@ -9,18 +9,24 @@ public class LoggerGenerator {
     private final Formatter formatter;
     private final Strategy[] strategies;
 
-    private final LoggerFactory loggerFactory = new LoggerFactory();
+    private final LoggerFactory loggerFactory = new LoggerFactory(); // Logger factory instance
 
     public LoggerGenerator(Formatter formatter, Strategy... strategies) {
         if (instance != null) throw new IllegalStateException("LoggerGenerator has already been initialized");
 
-        this.strategies = strategies;
         this.formatter = formatter;
-        instance = this;
+        this.strategies = strategies;
+
+        LoggerGenerator.instance = this;
+    }
+
+    public static void initialize(Formatter formatter, Strategy... strategies) {
+        if (instance != null) throw new IllegalStateException("LoggerGenerator has already been initialized");
+        new LoggerGenerator(formatter, strategies);
     }
 
     public static LoggerGenerator getInstance() {
-        if (instance == null) throw new IllegalStateException("LoggerGenerator has not been initialized yet");
+        if (instance == null) throw new IllegalStateException("LoggerGenerator has not been initialized yet.");
         return instance;
     }
 
