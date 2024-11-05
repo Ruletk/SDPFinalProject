@@ -11,15 +11,17 @@ public class LoggerGenerator {
 
     private final LoggerFactory loggerFactory = new LoggerFactory(); // Logger factory instance
 
-    private LoggerGenerator(Formatter formatter, Strategy... strategies) {
+    public LoggerGenerator(Formatter formatter, Strategy... strategies) {
+        if (instance != null) throw new IllegalStateException("LoggerGenerator has already been initialized");
+
         this.formatter = formatter;
         this.strategies = strategies;
+
+        LoggerGenerator.instance = this;
     }
 
-    public static LoggerGenerator getInstance(Formatter formatter, Strategy... strategies) {
-        if (instance == null) {
-            instance = new LoggerGenerator(formatter, strategies);
-        }
+    public static LoggerGenerator getInstance() {
+        if (instance == null) throw new IllegalStateException("LoggerGenerator has not been initialized yet.");
         return instance;
     }
 
