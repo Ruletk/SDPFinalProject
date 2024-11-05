@@ -20,4 +20,24 @@ public class LogMessage {
     public String getFormattedMessage() {
         return formatter.format(message, level, timestamp, loggerName);
     }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public String getLevel() {
+        return level;
+    }
+
+    public Long getTimestamp() {
+        return timestamp;
+    }
+
+    public Formatter getFormatter() {
+        return formatter;
+    }
+
+    public String getLoggerName() {
+        return loggerName;
+    }
 }
