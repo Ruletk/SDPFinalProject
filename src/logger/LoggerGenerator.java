@@ -6,16 +6,14 @@ import logger.strategy.Strategy;
 
 public class LoggerGenerator {
     private static LoggerGenerator instance;
-    private final Formatter formatter;
-    private final Strategy[] strategies;
+    private final LoggerConfiguration configuration;
 
     private final LoggerFactory loggerFactory = new LoggerFactory(); // Logger factory instance
 
     public LoggerGenerator(Formatter formatter, Strategy... strategies) {
         if (instance != null) throw new IllegalStateException("LoggerGenerator has already been initialized");
 
-        this.formatter = formatter;
-        this.strategies = strategies;
+        configuration = new LoggerConfiguration(formatter, strategies);
 
         LoggerGenerator.instance = this;
     }
@@ -31,6 +29,6 @@ public class LoggerGenerator {
     }
 
     public Logger getLogger(Class<?> clazz) {
-        return loggerFactory.createLogger(clazz.getName(), formatter, strategies);
+        return loggerFactory.createLogger(clazz.getName(), configuration);
     }
 }
