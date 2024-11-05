@@ -12,7 +12,6 @@ public class FormatterFactory {
             if ("simple".equalsIgnoreCase(type)) {
                 formatter = new SimpleFormatter();
             }
-            // Можете добавить другие форматы здесь
             formatters.put(type, formatter);
         }
         return formatter;
