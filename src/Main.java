@@ -16,7 +16,7 @@ public class Main {
         ThirdPartyLogger thirdPartyLogger = new ThirdPartyLogger();
         ThirdPartyLoggerAdapter adapter = new ThirdPartyLoggerAdapter(thirdPartyLogger);
 
-        LoggerGenerator loggerGenerator = new LoggerGenerator(simpleFormatter, stdOutStrategy, fileStrategy, adapter);
+        LoggerGenerator.initialize(simpleFormatter, stdOutStrategy, fileStrategy, adapter);
         Logger logger = LoggerGenerator.getInstance().getLogger(Main.class);
 
         logger.info("This is an info message.");
