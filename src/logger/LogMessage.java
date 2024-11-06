@@ -2,6 +2,10 @@ package logger;
 
 import logger.formatter.Formatter;
 
+/**
+ * LogMessage class is used to store the log message details.
+ * It is used to store the log message details like message, level, timestamp, formatter, and logger name.
+ */
 public class LogMessage {
     private final String message;
     private final String level;
